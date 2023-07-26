@@ -52,7 +52,7 @@ let getComputerSelection = () => {
 
 }
 let game = () =>{
-    for(let i = 0;i <= 5;i++){
+    for(let i = 1;i <= 5;i++){
         const player = prompt("Enter rock/paper/scissors: ").toLowerCase();
         const computer = getComputerSelection();
         console.log(playRound(player,computer));
