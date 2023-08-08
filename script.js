@@ -34,14 +34,7 @@ let playRound = (playerSelection,computerSelection) => {
     }
 
     //return output
-    let out = `you ${result}`
-    if(result === "lose"){
-        return out + ` ${computerSelection} beats ${playerSelection}`;
-    }else if(result === "win"){
-        return out + ` ${playerSelection} beats ${computerSelection}`;
-    }else{
-        return out;
-    }
+    return result;
 
 
 }
@@ -51,11 +44,50 @@ let getComputerSelection = () => {
     return results[Math.floor(Math.random() * results.length)];
 
 }
+
 let game = () =>{
-    for(let i = 1;i <= 5;i++){
-        const player = prompt("Enter rock/paper/scissors: ").toLowerCase();
-        const computer = getComputerSelection();
-        console.log(playRound(player,computer));
-    }
+    
+    const button = document.querySelectorAll('button');
+    let computerScore = 0;
+    let playerScore = 0;
+
+   button.forEach(element => {
+    element.addEventListener('click', () =>{
+        let playerSelection = element.value
+        const result = document.querySelector('#result')
+        let computerSelection = getComputerSelection()
+
+        let gameResult = playRound(playerSelection,computerSelection)
+        console.log(gameResult);
+        result.textContent = gameResult;
+        if (gameResult == "win"){
+            playerScore += 1
+        }else if(gameResult == "lose"){
+            computerScore += 1
+            
+        }else{
+            playerScore += 1
+            computerScore += 1
+        }
+
+        
+        const comp = document.querySelector('#computer')
+        const player =  document.querySelector('#player')
+        comp.textContent = computerScore
+        player.textContent = playerScore
+        const winner = document.querySelector('#winner')
+        if (computerScore == 5){
+            winner.textContent = "computer wins"
+        }
+        if (playerScore ==  5) {
+            winner.textContent = "player wins"
+            
+        }
+    
+
+    })
+    
+   });
+    
 }
 game()
